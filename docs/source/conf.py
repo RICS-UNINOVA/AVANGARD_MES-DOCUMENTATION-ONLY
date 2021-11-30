@@ -2,12 +2,12 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'MES System'
+copyright = '2021, UNINOVA'
+author = 'Francisco Silva'
 
 release = '0.1'
-version = '0.1.0'
+version = '1.0.2'
 
 # -- General configuration
 
