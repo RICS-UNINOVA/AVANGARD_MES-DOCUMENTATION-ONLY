@@ -21,4 +21,8 @@ Contents
    usage
    api
    install
+   data_models
+   Backend_Files
+   Frontend_Files
+   BLK_Integration
    
