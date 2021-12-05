@@ -1,4 +1,4 @@
-Install
+Setting Up
 =====
 
 .. _installation:
@@ -10,7 +10,7 @@ something
 
 .. _run:
 
-Run
+Run the Project
 ------------
 
 something 2
