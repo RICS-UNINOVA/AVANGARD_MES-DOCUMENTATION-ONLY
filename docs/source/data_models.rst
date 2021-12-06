@@ -6,7 +6,7 @@ Product Model
 
 some description
 
-.. code-block:: console
+.. code-block:: python
 
   class Product(models.Model):
       Product_PN = models.CharField(max_length=200, null=True)
@@ -17,7 +17,7 @@ Production Unit Model
 
 some description
 
-.. code-block:: console
+.. code-block:: python
 
   class ProductionUnit(models.Model):
       _id = models.CharField(max_length=500, null=True, blank=True)
@@ -33,7 +33,7 @@ Process Model
 
 some description
 
-.. code-block:: console
+.. code-block:: python
 
 
   class Process(models.Model):
@@ -47,7 +47,8 @@ Event Model
 
 some description
 
-.. code-block:: console
+.. code-block:: python
+
   class EventCause(models.Model):
        STATUS = (
             ('Disponibilidade', 'Disponibilidade'),
@@ -75,7 +76,7 @@ Workerlog Model
 
 some description
 
-.. code-block:: console
+.. code-block:: python
 
   class WorkerLog(models.Model):
       ProductionUnit = models.ForeignKey(ProductionUnit, null=True, on_delete=models.SET_NULL)
@@ -90,7 +91,7 @@ Process/Product Model
 
 some description
 
-.. code-block:: console
+.. code-block:: python
   
   class ProcessProduct(models.Model):
       Process = models.ForeignKey(Process, null=True, on_delete=models.SET_NULL)
@@ -102,7 +103,7 @@ Production Model
 
 some description
 
-.. code-block:: console
+.. code-block:: python
 
   class Production(models.Model):
       Product = models.ForeignKey(Product, null=True, on_delete=models.CASCADE)
@@ -114,7 +115,7 @@ Defect Production Model
 
 some description
 
-.. code-block:: console
+.. code-block:: python
 
   class DefectProduction(models.Model):
       Product = models.ForeignKey(Product, null=True, on_delete=models.CASCADE)
@@ -126,7 +127,7 @@ Production Event Model
 
 some description
 
-.. code-block:: console
+.. code-block:: python
 
   class ProductionEvent(models.Model):
       Process = models.ForeignKey(Process, null=True, on_delete=models.CASCADE)
@@ -140,7 +141,7 @@ OSM Equipment Model
 
 some description
 
-.. code-block:: console
+.. code-block:: python
 
    class Equipment(models.Model):
         Description = models.CharField(max_length=200, null=True)
@@ -150,7 +151,7 @@ OSM Symptoms Model
 
 some description
 
-.. code-block:: console
+.. code-block:: python
 
   class Symptoms(models.Model):
       Description = models.CharField(max_length=200, null=True)
@@ -160,7 +161,7 @@ OSM Description Model
 
 some description
 
-.. code-block:: console
+.. code-block:: python
 
 
   class Cause(models.Model):
@@ -171,7 +172,7 @@ OSM Intervention Model
 
 some description
 
-.. code-block:: console
+.. code-block:: python
 
 
   class Intervention(models.Model):
@@ -182,7 +183,7 @@ OSM Failure Model
 
 some description
 
-.. code-block:: console
+.. code-block:: python
 
 
   class Failure(models.Model):
@@ -193,7 +194,7 @@ OSM Model
 
 some description
 
-.. code-block:: console
+.. code-block:: python
 
   class OSM(models.Model):
       Maintenance = models.ForeignKey(ProductionEvent, null=True, on_delete=models.SET_NULL)
@@ -213,7 +214,7 @@ Day Report Model
 
 some description
 
-.. code-block:: console
+.. code-block:: python
 
   class DayReport(models.Model):
       _id = models.CharField(max_length=500, null=True, blank=True)
@@ -249,18 +250,4 @@ some description
       T_ProductionTime = models.FloatField(null=False, blank=True)
 
 
-Kafka Token Model
-------------
 
-some description
-
-.. code-block:: console
-
-  class KafkaToken(models.Model):
-      tipoInstancia = models.CharField(max_length=200, null=True, blank=True)
-      token = models.CharField(max_length=300, null=True, blank=True)
-      publicKey = models.CharField(max_length=200, null=True, blank=True)
-      password = models.CharField(max_length=200, null=True, blank=True)
-      record_id = models.CharField(max_length=200, null=True, blank=True)
-      topic = models.CharField(max_length=200, null=True, blank=True)
-      name = models.CharField(max_length=200, null=True, blank=True)
