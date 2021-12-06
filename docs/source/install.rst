@@ -13,32 +13,46 @@ something
 Run the Project
 ------------
 
-something 2
+For the Django Application (Running on Port:8000) you should open a new terminal and do the following:
 
-Se o servidor tiver de ser reiniciado executar as seguintes ações para correr o MES
-
-Cmd Window 1 - Django Application (Running on Port:8000)
+Go to the backend folder:
 
 .. code-block:: console
 
-   cd desktop\backend
+   cd \backend
+
+Run the python enviroment:
 
 .. code-block:: console
 
    env\Scripts\activate
-    
+
+Go to the maap folder:
+
 .. code-block:: console
 
    cd maap
+
+Run the Django App:
 
 .. code-block:: console
 
    python manage.py runserver 0.0.0.0:8000 --noreload
     
-Cmd Window 2 - React Application (Running on Port:3000)	
+    
+    
+Next for the React Application (Running on Port:3000) you should just run this lines:
 	
-  
-		-> cd desktop\frontend\gui
-		-> npm start
+Start by going to the gui folder:
+
+.. code-block:: console
+
+	cd \frontend\gui
+
+Then just run the ract app:
+
+.. code-block:: console	 
+
+	npm start
 
 	
