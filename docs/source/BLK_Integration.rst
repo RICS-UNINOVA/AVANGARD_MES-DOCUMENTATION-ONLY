@@ -2,21 +2,19 @@
 Blockchain Integration
 *******************
 
+The integration with the blockchain will allow to amplify the scope of the vertical integration of this system allowing a connection between the MES and the ERP systems. This communication is not done directly but instead with a Kafka server that works as a middleware betweem the chain and the MES. The communication is done in a publish/subscribe basis.
 
-topics 
-
-unique key formulation
+The blockchain allows two main types of data: dynamic data and non dynamic data. The difference being that dynamic data can be updated in the contrary to the non dynamic. An example of this is the Production Unit Integration that is dynamic data cause it requires updates from time to time. The Day Report Integration is an example of a non dynamic data because it is information that is not updated or changed.
 
 producer 
 
 consumer
 
-master token creation
 
 Kafka Token Model
 ================
 
-some description
+In order to save some information to access the blockchain the following data model was created:
 
 .. code-block:: python
 
@@ -28,7 +26,8 @@ some description
       record_id = models.CharField(max_length=200, null=True, blank=True)
       topic = models.CharField(max_length=200, null=True, blank=True)
       name = models.CharField(max_length=200, null=True, blank=True)
-      
+
+master token creation
 
 Kafka Python
 ================
@@ -44,14 +43,37 @@ Topics
 
 BLK_Res
 
-BLK_ 
+
+
+BLK_Rec
+
+BLK_Rty
+
+
+
+BLK_Part_Lst
+
+BLK_Part_Ans
+
+
+
+BLK_ACT_Lst
+
+BLK_Act_Ans
+
+
+
 
 Day Report Integration 
 ================
 
-  updater.py
+This integration is done with the use of a scheduler to update the blockchain each day at a certain time. The apscheduler library was used to accomplish this.
 
-.. code-block:: console
+apscheduler: https://apscheduler.readthedocs.io/en/3.x/
+
+In the updater.py file the following job was added so that each day at 9h30 the function to update the blockchain is called:
+
+.. code-block:: python
 
   scheduler.add_job(schedule_KafkaDaily, 'cron', hour=9,minute=30)
 
@@ -59,6 +81,80 @@ Day Report Integration
 
   def schedule_KafkaDaily():
    ###
+
+To be able to identify humanly this reports a string coding was created being the code 001 associated with day reports, the 21 the year 2021, 01 being the day of the week in this case monday, a 02 identifying the second week of the year and finally a code for the identification of the production unit.
+
+.. code-block:: python
+
+ "001_21_01_02_PT10"
+
+The code to allow this is the following:
+
+.. code-block:: python
+
+  year = str(Report[0].Date.year)
+  flowID_str = "001_" + year[2] + year[3] + "_" + str(Report[0].Date.isocalendar()[1]) + "_" + str(Report[0].Date.isocalendar()[2]) + "_" + Report[0].Unit.Code
+        
+Each record must have a unique record_id so we grabbed the objectID from the django database and for each shift and indicator we gave a number to be specific individually. 
+
+An example could be the following for a shift A Disponibility indicator:
+
+.. code-block:: python
+
+  "614f24586a93d2db8f59b323_101"
+
+The code to allow this is the following:
+
+.. code-block:: python
+
+  shift = ""
+  turno = ""
+  field = ""
+  indicador = ""
+  skip = 0
+  
+  for atribute in Report[0]._meta.get_fields():
+      if skip > 3:
+          atribute_str = str(atribute)[15:]
+
+          if atribute_str[0] == 'A':
+              shift = '1'
+              turno = "Turno A"
+          if atribute_str[0] == 'B':
+              shift = '2'
+              turno = "Turno B"
+          if atribute_str[0] == 'C':
+              shift = '3'
+              turno = "Turno C"
+          if atribute_str[0] == 'T':
+              shift = '4'
+              turno = "Day Average"
+
+          atribute_str = atribute_str[2:]
+
+          if atribute_str == 'D':
+              field = '01'
+              indicador = "Disponibilty"
+          if atribute_str == 'P':
+              field = '02'
+              indicador = "Performance"
+          if atribute_str == 'Q':
+              field = '03'
+              indicador = "Quality"
+          if atribute_str == 'OEE':
+              field = '04'
+              indicador = "Overall Equipment Effectiveness"
+          if atribute_str == 'MTBF':
+              field = '05'
+              indicador = "Mean Time Between Failures"
+          if atribute_str == 'MTTR':
+              field = '06'
+              indicador = "Mean Time To recovery"
+          if atribute_str == 'ProductionTime':
+              field = '07'
+              indicador = "Production Time"
+
+          coding = str(Report[0]._id) + "_" + shift + field
 
 Production Unit Integration 
 ================
@@ -83,6 +179,10 @@ For this integration the API nº 12 was altered so that it calls the function Pr
   
   
 This function is defined on the Kafka_ProductionUnitUpdate.py file. It receives three parameters: the status to be updated (str), the process name to be updated (str) and a the id of the production unit intended (int).
+
+It will start by checking if a record type is already present in the blockchain for a production unit and if it doesn't exist creates it. Then it will check for a reporter for the especific production unit and again create if it doesn't exist.
+
+Now it is in full capabilities to send a update to properties to the correct reporter with a correct record type.
 
 
 ERP Integration 
