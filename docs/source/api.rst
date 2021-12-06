@@ -318,7 +318,7 @@ Response
    }
 
 
-API nº 12 - Production Unit (PUT)
+API nº 12 - Production Unit (PATCH)
 ------------
 
 some description
