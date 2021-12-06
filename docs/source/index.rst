@@ -19,9 +19,9 @@ Contents
 .. toctree::
 
    usage
-   api
    install
    data_models
+   api
    Backend_Files
    Frontend_Files
    BLK_Integration
