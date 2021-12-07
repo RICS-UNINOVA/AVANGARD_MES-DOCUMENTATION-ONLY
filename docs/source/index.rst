@@ -18,7 +18,6 @@ Contents
 
 .. toctree::
 
-   usage
    install
    data_models
    api
