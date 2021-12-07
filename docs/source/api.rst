@@ -15,14 +15,14 @@ some description
 API url:
 ^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: console
+.. code-block:: 
 
    https://YOUR_IP_ADDRESS:8000/api/Production/GET
    
 Request body:
 ^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "receiving_agent": "02c78438f5cd04771847ef4ba3ec00c6f198b698f36e9a93ea3f0aebc47b4148ca"
@@ -31,7 +31,7 @@ Request body:
 Response
 ^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "message": "Create partner request transaction submitted"
@@ -45,13 +45,13 @@ some description
 
 API url:
 
-.. code-block:: console
+.. code-block:: 
 
    https://YOUR_IP_ADDRESS:8000/api/Production/POST
    
 Request body:
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "receiving_agent": "02c78438f5cd04771847ef4ba3ec00c6f198b698f36e9a93ea3f0aebc47b4148ca"
@@ -59,7 +59,7 @@ Request body:
    
 Response
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "message": "Create partner request transaction submitted"
@@ -73,13 +73,13 @@ some description
 
 API url:
 
-.. code-block:: console
+.. code-block:: 
 
    https://YOUR_IP_ADDRESS:8000/api/DefectProduction/GET
    
 Request body:
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "receiving_agent": "02c78438f5cd04771847ef4ba3ec00c6f198b698f36e9a93ea3f0aebc47b4148ca"
@@ -87,7 +87,7 @@ Request body:
    
 Response
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "message": "Create partner request transaction submitted"
@@ -101,13 +101,13 @@ some description
 
 API url:
 
-.. code-block:: console
+.. code-block:: 
 
    https://YOUR_IP_ADDRESS:8000/api/DefectProduction/POST
    
 Request body:
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "receiving_agent": "02c78438f5cd04771847ef4ba3ec00c6f198b698f36e9a93ea3f0aebc47b4148ca"
@@ -115,7 +115,7 @@ Request body:
    
 Response
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "message": "Create partner request transaction submitted"
@@ -129,13 +129,13 @@ some description
 
 API url:
 
-.. code-block:: console
+.. code-block:: 
 
    https://YOUR_IP_ADDRESS:8000/api/ProductionEvent/GET/
    
 Request body:
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "receiving_agent": "02c78438f5cd04771847ef4ba3ec00c6f198b698f36e9a93ea3f0aebc47b4148ca"
@@ -143,7 +143,7 @@ Request body:
    
 Response
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "message": "Create partner request transaction submitted"
@@ -157,13 +157,13 @@ some description
 
 API url:
 
-.. code-block:: console
+.. code-block:: 
 
    https://YOUR_IP_ADDRESS:8000/api/ProductionEvent/POST
    
 Request body:
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "receiving_agent": "02c78438f5cd04771847ef4ba3ec00c6f198b698f36e9a93ea3f0aebc47b4148ca"
@@ -171,7 +171,7 @@ Request body:
    
 Response
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "message": "Create partner request transaction submitted"
@@ -185,13 +185,13 @@ some description
 
 API url:
 
-.. code-block:: console
+.. code-block:: 
 
    https://YOUR_IP_ADDRESS:8000/api/ProductionUnit/PUT/<int:productionunit_id>
    
 Request body:
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "receiving_agent": "02c78438f5cd04771847ef4ba3ec00c6f198b698f36e9a93ea3f0aebc47b4148ca"
@@ -199,7 +199,7 @@ Request body:
    
 Response
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "message": "Create partner request transaction submitted"
@@ -213,13 +213,13 @@ some description
 
 API url:
 
-.. code-block:: console
+.. code-block:: 
 
    https://YOUR_IP_ADDRESS:8000/api/WorkerLog/GET
    
 Request body:
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "receiving_agent": "02c78438f5cd04771847ef4ba3ec00c6f198b698f36e9a93ea3f0aebc47b4148ca"
@@ -227,7 +227,7 @@ Request body:
    
 Response
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "message": "Create partner request transaction submitted"
@@ -241,13 +241,13 @@ some description
 
 API url:
 
-.. code-block:: console
+.. code-block:: 
 
    https://YOUR_IP_ADDRESS:8000/api/WorkerLog/POST
    
 Request body:
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "receiving_agent": "02c78438f5cd04771847ef4ba3ec00c6f198b698f36e9a93ea3f0aebc47b4148ca"
@@ -255,7 +255,7 @@ Request body:
    
 Response
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "message": "Create partner request transaction submitted"
@@ -269,13 +269,13 @@ some description
 
 API url:
 
-.. code-block:: console
+.. code-block:: 
 
    https://YOUR_IP_ADDRESS:8000/api/WorkerLog/PUT/<int:workerlog_id>
    
 Request body:
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "receiving_agent": "02c78438f5cd04771847ef4ba3ec00c6f198b698f36e9a93ea3f0aebc47b4148ca"
@@ -283,7 +283,7 @@ Request body:
    
 Response
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "message": "Create partner request transaction submitted"
@@ -297,13 +297,13 @@ some description
 
 API url:
 
-.. code-block:: console
+.. code-block:: 
 
    https://YOUR_IP_ADDRESS:8000/api/ProductionUnit
    
 Request body:
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "receiving_agent": "02c78438f5cd04771847ef4ba3ec00c6f198b698f36e9a93ea3f0aebc47b4148ca"
@@ -311,7 +311,7 @@ Request body:
    
 Response
 
-.. code-block:: console
+.. code-block:: 
 
    {
       "message": "Create partner request transaction submitted"
