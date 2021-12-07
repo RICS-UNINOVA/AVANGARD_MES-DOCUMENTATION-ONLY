@@ -6,13 +6,12 @@ The integration with the blockchain will allow to amplify the scope of the verti
 
 The blockchain allows two main types of data: dynamic data and non dynamic data. The difference being that dynamic data can be updated in the contrary to the non dynamic. An example of this is the Production Unit Integration that is dynamic data cause it requires updates from time to time. The Day Report Integration is an example of a non dynamic data because it is information that is not updated or changed.
 
-producer 
 
-consumer
-
+Kafka 
+================
 
 Kafka Token Model
-================
+------------
 
 In order to save some information to access the blockchain the following data model was created:
 
@@ -27,40 +26,136 @@ In order to save some information to access the blockchain the following data mo
       topic = models.CharField(max_length=200, null=True, blank=True)
       name = models.CharField(max_length=200, null=True, blank=True)
 
-master token creation
+.. Attention:: Master Token
+
+A Master token needs to be present so that this whole integration works! This Master token is a unique authentication token for an agent that is needed for a MES system, to be created in the Blockchain API and then added to the database when the MES system is deployd.
+
+This data should be stored in the database with a KafkaToken model where the fields tipoInstancia, token, publickey and password should be present. tipoInstancia field needs to be equal to "Master".
 
 Kafka Python
-================
+------------
 
-kafka python 
+For the connection with Kafka a python library was used: kafka-python.
 
-producer
+kafka-python: https://kafka-python.readthedocs.io/en/master/
 
-consumer
+There is two main parts for comunication with Kafka: the producer and the consumer. The producer is used when a message needs to be sent. On the contrary the consumer receives a message. Examples from the MES system code are bellow:
 
+Producer
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+  producer = KafkaProducer(api_version=(0, 9), bootstrap_servers=kafka_server_ip)
+  a = producer.send('BLK_Act_Lst', value=json_dump)
+        
+Consumer
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. code-block:: python
+
+  consumer = KafkaConsumer(group_id='mes_uninova', bootstrap_servers=kafka_server_ip, value_deserializer=lambda m: json.loads(m.decode('utf-8')))
+  consumer.subscribe('BLK_Res')
+        
 Topics
 ================
 
-BLK_Res
+In order to comunicate with Kafka some topics were pre-set depending on which data we wanted to save in the blockchain. The topic to receive messages was always the same (BLK_Res), to identify if a message is for the MES system a two parts message is always sent. The first part will have a token corresponding to the master token or to a reporter and the second will have the payload of the message containing data that was requested or a acknowledge or error message. Every time a new recorder is created (dynamic data) its information needs to be stored in the local MES database.
+
+Response
+------------
+
+  BLK_Res
+""""""""""""""""""
+
+Record 
+------------
 
 
-
-BLK_Rec
-
-BLK_Rty
+  BLK_Rec_ + ...
+^^^^^^^^^^^^^^^^^^^^^^
 
 
+Down bellow are some message examples sent to this topic (Day Report Integration, Production Unit Integration): 
 
-BLK_Part_Lst
-
-BLK_Part_Ans
-
+Day Report Integration:
 
 
-BLK_ACT_Lst
+.. code-block:: python
 
-BLK_Act_Ans
+  dataRecord = [{"auth": masterToken, "isRecord": True}, {"record_id": data_record_id, "record_type": data_record_type,"description": data_description, "dynamic": data_dynamic, "password": data_password, "properties": [data_properties[index]]}]
 
+Production Unit Integration
+
+Create a Reporter:
+
+
+.. code-block:: python
+
+  dataRecord = [{"auth": masterToken , "isRecord": True},{"record_id": data_record_id , "record_type": data_record_type , "description": data_description ,"dynamic": data_dynamic,"password": data_password,"properties": data_properties}]
+
+Update Properties:
+
+
+.. code-block:: python
+
+  dataProperties = [{"auth": token , "isRecord": False},{"record_id": data_record_id ,"properties": data_properties}] 
+  
+..        
+
+Record Type
+------------
+
+  BLK_Rty
+^^^^^^^^^^^^^^^^^^^^^^
+ 
+For the creation of a record type it must use this topic and have a payload like the following:
+
+.. code-block:: python
+
+  dataRecordType = [{"auth": masterToken, "isRecord": False}, {"name": data_name, "description": data_description, "properties": data_properties}]
+
+Partners
+------------
+
+For the partnership between agents the two topics bellow were used:
+
+  BLK_Part_Lst
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+  PartenerRequets = [{"auth": masterToken, "start": 0, "limit": 10}]
+..
+
+  BLK_Part_Ans
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+  PartenerRequets = [{"auth": masterToken}, {"id": id, "response": response}]
+
+Orders
+------------
+
+As for the orders the topics used were the following:
+
+  BLK_ACT_Lst
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+  
+  PartenerRequets = [{"auth": masterToken, "start": 0, "limit": 10}]
+..
+
+  BLK_Act_Ans
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+  PartenerRequets = [{"auth": masterToken}, {"id": id, "response": response}]
+                           
 
 
 
@@ -79,8 +174,7 @@ In the updater.py file the following job was added so that each day at 9h30 the 
 
 .. 
 
-  def schedule_KafkaDaily():
-   ###
+This function will start by checking if a record type exists on the MES database for this type of data indicators and if it doesn't exist creates it. Then grab the day reports from the previous day and for each one will encode the various indicators and send them to the blockchain one by one.
 
 To be able to identify humanly this reports a string coding was created being the code 001 associated with day reports, the 21 the year 2021, 01 being the day of the week in this case monday, a 02 identifying the second week of the year and finally a code for the identification of the production unit.
 
