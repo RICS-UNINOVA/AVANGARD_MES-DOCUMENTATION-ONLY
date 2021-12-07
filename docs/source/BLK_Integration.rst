@@ -201,18 +201,21 @@ API nº 37 - Blockchain Partner List (GET)
 This API gives you a list of the partner request associated with your MES System.
 
 API url:
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: 
 
    https://YOUR_IP_ADDRESS:8000/api/KafkaPartner/LIST
    
 Request params:
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: json
 
    {   }
    
 Response (Example):
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: javascript
 
@@ -243,7 +246,8 @@ Response (Example):
    }
  
 Code:
- 
+^^^^^^^^^^^^^^^^^^^^^^
+
 .. code-block:: python 
 
   class KafkaPartnerListView(APIView):
@@ -303,12 +307,14 @@ API nº 38 - Blockchain Partner Answer (GET)
 With this API a partner request can be accepted or rejected.
 
 API url:
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: 
 
    https://YOUR_IP_ADDRESS:8000/api/KafkaPartner/ANS
    
 Request params:
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: javascript
 
@@ -318,12 +324,14 @@ Request params:
    }
    
 Response
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: json
 
    { /* Answer from the blockchain */ }
 
 Code:
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
@@ -387,18 +395,21 @@ API nº 39 - Blockchain Order List (GET)
 This API gives you a list of the order request associated with your MES System.
 
 API url:
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: 
 
    https://YOUR_IP_ADDRESS:8000/api/KafkaOrder/LIST
    
 Request params:
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: json
 
    {     }
    
 Response (Example):
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: javascript
 
@@ -441,6 +452,7 @@ Response (Example):
 
   
 Code:
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python 
 
@@ -502,12 +514,14 @@ API nº 40 - Blockchain Order Answer (GET)
 With this API a order request can be accepted or rejected.
 
 API url:
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: 
 
    https://YOUR_IP_ADDRESS:8000/api/KafkaOrder/ANS
    
 Request params:
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: javascript
 
@@ -517,12 +531,14 @@ Request params:
    }
    
 Response:
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: json
 
    {  /* Answer from the blockchain */  }
    
 Code:
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
   
